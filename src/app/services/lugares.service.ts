@@ -23,7 +23,8 @@ export class LugaresService{
         return this.lugares.filter((lugar) => { return lugar.id == id})[0] || null
     }
     public guardarLugar(lugar){
-        this.afDB.database.ref('lugares/1').set(lugar);
+        console.log(lugar);
+        this.afDB.database.ref('lugares/'+lugar.id).set(lugar);
     }
 
 }
