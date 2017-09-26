@@ -13,12 +13,27 @@ import { LugaresComponent } from './lugares/lugares.component';
 import {ContactoComponent} from "./contacto/contacto.component";
 import {LugaresService} from "./services/lugares.service";
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 const appRoutes: Routes = [
   {path: '', component: LugaresComponent},
   {path: 'lugares', component: LugaresComponent},
   {path: 'detalle/:id', component: DetalleComponent},
   {path: 'contacto', component: ContactoComponent}
 ];
+
+
+export const firebaseConfig = {
+    apiKey: "AIzaSyDrvDcVYFaKbT4xFDKNDV5qi4QbtgE2iyI",
+    authDomain: "platzisquare-dc0be.firebaseapp.com",
+    databaseURL: "https://platzisquare-dc0be.firebaseio.com",
+    projectId: "platzisquare-dc0be",
+    storageBucket: "platzisquare-dc0be.appspot.com",
+    messagingSenderId: "440502660472"
+};
+
 
 @NgModule({
   declarations: [
@@ -36,7 +51,10 @@ const appRoutes: Routes = [
       apiKey: 'AIzaSyCjdJHaJouM35IYXREAkWce32oL7NcfgEw'
     }),
     BrowserAnimationsModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
 
 
 
