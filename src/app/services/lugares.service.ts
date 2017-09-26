@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {AngularFireDatabase} from "angularfire2/database";
+import {Http} from "@angular/http";
 
 @Injectable()
 
@@ -14,7 +15,7 @@ export class LugaresService{
         {id: 6, plan: 'gratuito' , cercania : 3, distancia: 120, active: true, nombre: 'Parqueadero La 14', description: 'Descripción de este negocio. Más adelante dentremos mas informacion'}
     ];
 
-    constructor(private afDB: AngularFireDatabase){}
+    constructor(private afDB: AngularFireDatabase, private http: Http){}
 
     public getLugares(){
         return this.afDB.list('/lugares')
@@ -28,4 +29,9 @@ export class LugaresService{
 
     }
 
+    public obtenerGeoData(direccion){
+        //http://maps.google.com/maps/api/geocode/json?address=78-43+diagonal+70f,+Bogota,Colombia
+        return this.http.get('http://maps.google.com/maps/api/geocode/json?address='+direccion);
+
+    }
 }

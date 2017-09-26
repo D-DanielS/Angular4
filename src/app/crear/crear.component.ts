@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {LugaresService} from "../services/lugares.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-crear',
@@ -7,16 +8,28 @@ import {LugaresService} from "../services/lugares.service";
 })
 export class CrearComponent {
   lugar: any = {};
-
-  constructor(private lugaresService: LugaresService){
+  id:any = null;
+  constructor(private lugaresService: LugaresService, private route:ActivatedRoute){
+      this.id = this.route.snapshot.params['id'];
+      console.log(this.id);
 
   }
 
   guardarLugar(){
-    this.lugar.id = Date.now();
-    this.lugaresService.guardarLugar(this.lugar);
+    var direccion = this.lugar.calle+','+this.lugar.ciudad+','+this.lugar.pais;
+    this.lugaresService.obtenerGeoData(direccion)
+        .subscribe((result) => {
+            this.lugar.lat = result.json().results[0].geometry.location.lat;
+            this.lugar.lng = result.json().results[0].geometry.location.lng;
 
-    alert("Negocio Guardado con Exito");
-    this.lugar = {};
+            this.lugar.id = Date.now();
+            this.lugaresService.guardarLugar(this.lugar);
+
+            alert("Negocio Guardado con Exito");
+            this.lugar = {};
+
+        });
+
+
   }
 }
