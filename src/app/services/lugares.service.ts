@@ -26,12 +26,19 @@ export class LugaresService{
     public guardarLugar(lugar){
         console.log(lugar);
         this.afDB.database.ref('lugares/'+lugar.id).set(lugar);
-
     }
-
+    public editarLugar(lugar){
+        console.log(lugar);
+        this.afDB.database.ref('lugares/'+lugar.id).set(lugar);
+    }
     public obtenerGeoData(direccion){
         //http://maps.google.com/maps/api/geocode/json?address=78-43+diagonal+70f,+Bogota,Colombia
         return this.http.get('http://maps.google.com/maps/api/geocode/json?address='+direccion);
+
+    }
+
+    public getLugar(id){
+        return this.afDB.object('lugares/'+id)
 
     }
 }
