@@ -1,0 +1,38 @@
+<div class="bg-warning">
+  {{errorText}}
+</div>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+    <agm-marker  *ngFor="let lugar of lugares" [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
+</agm-map>
+
+<hr />
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Lugares Cercanos</h2>
+      <a class="btn btn-primary" routerLink="/crear/new">Crear Nuevo Negocio</a>
+
+      <ul class="list-group">
+        <ng-container *ngFor="let lugar of lugares">
+          <a routerLink="/crear/{{lugar.id}}" >
+            <li class="list-group-item "  >
+              {{lugar.nombre | lowercase }}
+              <br/>
+              <small>Creado: {{lugar.id | date: 'medium' | lowercase}}</small>
+              <br />
+              {{'1234.12345678' | number: '1.2-2'}}
+            </li>
+
+
+          </a>
+        </ng-container>
+      </ul>
+
+    </div>
+    <div class="col-md-4">
+      <h2>Publicidad</h2>
+  
+    </div>
+  </div>
+</div>
