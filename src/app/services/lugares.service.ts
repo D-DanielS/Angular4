@@ -22,7 +22,7 @@ export class LugaresService{
 
     public getLugares(){
         //return this.afDB.list('/lugares')
-        return this.http.get(this.API_ENDPOINT + '/.json')
+        return this.http.get(this.API_ENDPOINT + '/.js')
             .map((resultado) =>{
                 const data = resultado.json().lugares;
                 return data;
